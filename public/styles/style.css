@@ -1,0 +1,151 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body, html {
+  background-color: #f8f8f8;
+  line-height: 1.5; }
+
+.App {
+  background-color: #f8f8f8;
+  font-family: Helvetica, Arial, sans-serif;
+  padding: 60px 20px; }
+
+.TodoInput {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  line-height: 40px;
+  align-items: center;
+  border: 1px solid #eaeaea;
+  border-radius: 3px;
+  padding-right: 10px;
+  background-color: #ffffff; }
+  .TodoInput--focused {
+    border-color: #52b1e6; }
+  .TodoInput__input {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 1em;
+    width: 100%;
+    height: 100%;
+    padding: 0 10px;
+    border: 0;
+    outline: none;
+    color: #323232;
+    background-color: transparent;
+    cursor: pointer; }
+  .TodoInput__button {
+    flex: 0;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    outline: none;
+    appearance: none;
+    border: 0;
+    border-radius: 3px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0 5px;
+    cursor: pointer;
+    background-color: #52b1e6;
+    color: #fff;
+    transition: opacity .2s ease-in-out; }
+    .TodoInput__button--disabled {
+      opacity: .5;
+      cursor: default; }
+
+.Todo {
+  position: relative;
+  font-weight: bold;
+  height: 40px;
+  padding-left: 45px;
+  margin-top: 10px;
+  border: 1px solid #eaeaea;
+  border-radius: 3px;
+  background-color: #ffffff;
+  cursor: pointer; }
+  .Todo--completed {
+    opacity: .6; }
+    .Todo--completed .Todo__text {
+      text-decoration: line-through; }
+  .Todo__checkbox {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: 2px solid #323232;
+    border-radius: 3px;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center; }
+  .Todo__text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 40px; }
+
+.TodoList {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto; }
+  .TodoList__clear {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    color: #52b1e6;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer; }
+  .TodoList__no-todos {
+    padding: 20px;
+    text-align: center;
+    color: #969696; }
+  .TodoList input {
+    flex: 1; }
+  .TodoList button {
+    flex: 0;
+    flex-basis: auto; }

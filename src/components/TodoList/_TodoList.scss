@@ -1,0 +1,31 @@
+.TodoList {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+
+  &__clear {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    color: $blue;
+    font-size: 12px;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  &__no-todos {
+  	padding: 20px;
+  	text-align: center;
+  	color: $gray
+  }
+
+  input {
+    flex: 1;
+  }
+
+  button {
+    flex: 0;
+    flex-basis: auto; 
+  }
+
+}

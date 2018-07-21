@@ -1,0 +1,52 @@
+.TodoInput {
+  display: flex;
+  flex-direction: row;
+  height: $rowHeight;
+  line-height: $rowHeight;
+  align-items: center;
+  border: 1px solid $lightGray;
+  border-radius: 3px;
+  padding-right: 10px;
+  background-color: $white;
+
+  &--focused {
+    border-color: $blue;
+  }
+
+	&__input {
+		font-family: $fontStack;
+		font-size: 1em;
+		width: 100%;
+		height: 100%;
+		padding: 0 10px;
+		border: 0;
+		outline: none;
+		color: $darkGray;
+		background-color: transparent;
+		cursor: pointer;
+	}
+
+	&__button {
+		flex: 0;
+	  font-family: $fontStack;
+	  font-size: 15px;
+	  outline: none;
+	  appearance: none;
+	  border: 0;
+	  border-radius: 3px;
+	  height: 25px;
+	  line-height: 25px;
+	  padding: 0 5px;
+	  cursor: pointer;
+	  background-color: $blue;
+	  color: #fff;
+    transition: opacity .2s ease-in-out;
+
+	  &--disabled {
+	  	opacity: .5;
+	    cursor: default;
+	  }
+
+	}
+
+}

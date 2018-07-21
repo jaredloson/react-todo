@@ -1,0 +1,42 @@
+.Todo {
+  position: relative;
+  font-weight: bold;
+	height: $rowHeight;
+  padding-left: 45px;
+  margin-top: 10px;
+  border: 1px solid $lightGray;
+  border-radius: 3px;
+  background-color: $white;
+  cursor: pointer;
+
+  &--completed {
+    opacity: .6;
+
+    .Todo__text {
+      text-decoration: line-through;;
+    }
+
+  }
+
+  &__checkbox {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: 2px solid $darkGray;
+    border-radius: 3px;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  &__text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: $rowHeight;
+  }
+
+}
