@@ -33,8 +33,6 @@ class TodoList extends Component {
      
       <div className="TodoList">
 
-        <div className="TodoList__clear" onClick={this.clearList}>Clear</div>
-
         <TodoInput onSubmit={this.addItem} />
 
         {this.state.items.length > 0 ? (
