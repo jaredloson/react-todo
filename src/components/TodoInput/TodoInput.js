@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import classSet from 'react-classset';
 
 class TodoInput extends Component {
@@ -7,8 +7,8 @@ class TodoInput extends Component {
   constructor() {
     super();
     this.state = {
-      newTodo: '',
-      inputFocused: false
+      text: '',
+      focused: false
     }
     this.toggleInputFocus = this.toggleInputFocus.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -21,11 +21,11 @@ class TodoInput extends Component {
   }
 
   toggleInputFocus() {
-    this.setState({inputFocused: !this.state.inputFocused});
+    this.setState({focused: !this.state.focused});
   }
 
   handleInputChange(event) {
-    this.setState({newTodo: event.target.value});
+    this.setState({text: event.target.value});
   }
 
   handleKeypress(event) {
@@ -35,21 +35,22 @@ class TodoInput extends Component {
   }
 
   handleSubmit() {
-    if (!this.state.newTodo) return;
-    this.props.onSubmit(this.state.newTodo);
-    this.setState({newTodo: ''});
+    const text = this.state.text.trim();
+    if (text.length === 0) return;
+    this.props.addTodo(text);
+    this.setState({text: ''});
   }
 
   render() {
 
     const inputWrapClasses = classSet({
       'TodoInput': true,
-      'TodoInput--focused': this.state.inputFocused
+      'TodoInput--focused': this.state.focused
     });
 
     const buttonClasses = classSet({
       'TodoInput__button': true,
-      'TodoInput__button--disabled': !this.state.newTodo
+      'TodoInput__button--disabled': !this.state.text
     })
 
     return (
@@ -58,7 +59,7 @@ class TodoInput extends Component {
           className="TodoInput__input"
           type="text"
           placeholder="Add a to do..."
-          value={this.state.newTodo}
+          value={this.state.text}
           onFocus={this.toggleInputFocus}
           onBlur={this.toggleInputFocus}
           onChange={this.handleInputChange}
@@ -76,8 +77,8 @@ class TodoInput extends Component {
 
 }
 
-TodoInput.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-};
+const mapDispatchToProps = dispatch => ({
+  addTodo: text => dispatch({type: 'ADD_TODO', text})
+});
 
-export default TodoInput;
+export default connect(null, mapDispatchToProps)(TodoInput);

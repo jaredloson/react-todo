@@ -15,6 +15,7 @@ class Todo extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.item);
     this.setState({item: this.props.item});
   }
 

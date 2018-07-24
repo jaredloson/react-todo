@@ -1,31 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Todo from '../Todo/Todo';
 import TodoInput from '../TodoInput/TodoInput';
 
 class TodoList extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      items: [],
-      loading: true
-    }
-    this.addItem = this.addItem.bind(this);
-  }
-
-  componentDidMount() {
-    this.setState({loading: false});
-  }
-
-  addItem(val) {
-    const items = this.state.items.slice();
-    items.push({
-      id: this.state.items.length,
-      text: val,
-      completed: false
-    });
-    this.setState({items: items});
-  }
 
   render() {
 
@@ -33,19 +11,17 @@ class TodoList extends Component {
      
       <div className="TodoList">
 
-        <TodoInput onSubmit={this.addItem} />
+        <TodoInput />
 
-        {this.state.items.length > 0 ? (
-          this.state.items.map( (item, idx) =>
+        {this.props.items.length > 0 ? (
+          this.props.items.map( (item, idx) =>
             <Todo
               key={item.id}
               item={item}
             />
           )
         ): (
-          <div className="TodoList__no-todos">
-            {this.state.loading ? 'Getting items...' : 'Add your first todo'}
-          </div>
+          <div className="TodoList__no-todos">Add your first todo</div>
         )}
 
       </div>
@@ -54,4 +30,10 @@ class TodoList extends Component {
   }
 }
 
-export default TodoList;
+function mapStateToProps(state) {
+  return {
+    items: state.items
+  };
+}
+
+export default connect(mapStateToProps)(TodoList);
