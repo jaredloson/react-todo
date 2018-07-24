@@ -37,7 +37,7 @@ class TodoInput extends Component {
   handleSubmit() {
     const text = this.state.text.trim();
     if (text.length === 0) return;
-    this.props.addTodo(text);
+    this.props.dispatch({type: 'ADD_ITEM', text});
     this.setState({text: ''});
   }
 
@@ -77,8 +77,4 @@ class TodoInput extends Component {
 
 }
 
-const mapDispatchToProps = dispatch => ({
-  addTodo: text => dispatch({type: 'ADD_TODO', text})
-});
-
-export default connect(null, mapDispatchToProps)(TodoInput);
+export default connect()(TodoInput);

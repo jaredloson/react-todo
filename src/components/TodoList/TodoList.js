@@ -5,6 +5,15 @@ import TodoInput from '../TodoInput/TodoInput';
 
 class TodoList extends Component {
 
+  constructor() {
+    super();
+    this.toggleItem = this.toggleItem.bind(this);
+  }
+
+  toggleItem(id) {
+    this.props.dispatch({type: 'TOGGLE_ITEM', id: id})
+  }
+
   render() {
 
     return (
@@ -17,7 +26,8 @@ class TodoList extends Component {
           this.props.items.map( (item, idx) =>
             <Todo
               key={item.id}
-              item={item}
+              {...item}
+              toggleItem={this.toggleItem}
             />
           )
         ): (
@@ -30,10 +40,8 @@ class TodoList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    items: state.items
-  };
-}
+const mapStateToProps = state => ({
+  items: state.items
+});
 
 export default connect(mapStateToProps)(TodoList);

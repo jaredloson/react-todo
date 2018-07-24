@@ -9,7 +9,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch(action.type) {
-    case 'ADD_TODO':
+
+    case 'ADD_ITEM':
       const newItem = {
         id: state.items.length,
         text: action.text,
@@ -17,8 +18,18 @@ const reducer = (state = initialState, action) => {
       }
       return {...state, items: [...state.items, newItem]};
 
+    case 'TOGGLE_ITEM':
+      const items = state.items.map( item => {
+        if (item.id === action.id) {
+          item.completed = !item.completed;
+        }
+        return item;
+      });
+      return {...state, items: items}
+
     default:
       return state;
+
   }
 };
 
