@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import classSet from 'react-classset';
 
-class TodoInput extends Component {
+export class TodoInput extends Component {
 
   constructor() {
     super();
@@ -12,12 +12,7 @@ class TodoInput extends Component {
     }
     this.toggleInputFocus = this.toggleInputFocus.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleKeypress = this.handleKeypress.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  componentDidMount() {
-    window.addEventListener('keypress', this.handleKeypress);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
   }
 
   toggleInputFocus() {
@@ -28,17 +23,10 @@ class TodoInput extends Component {
     this.setState({text: event.target.value});
   }
 
-  handleKeypress(event) {
+  handleKeyDown(event) {
     if (event.keyCode === 13) {
-      this.handleSubmit();
+      this.props.handleSubmit(this);
     }
-  }
-
-  handleSubmit() {
-    const text = this.state.text.trim();
-    if (text.length === 0) return;
-    this.props.dispatch({type: 'ADD_ITEM', text});
-    this.setState({text: ''});
   }
 
   render() {
@@ -63,10 +51,11 @@ class TodoInput extends Component {
           onFocus={this.toggleInputFocus}
           onBlur={this.toggleInputFocus}
           onChange={this.handleInputChange}
+          onKeyDown={this.handleKeyDown}
         />
         <button
           className={buttonClasses}
-          onClick={this.handleSubmit}
+          onClick={() => this.props.handleSubmit(this) }
         >
           Add To Do
         </button>
@@ -77,4 +66,16 @@ class TodoInput extends Component {
 
 }
 
-export default connect()(TodoInput);
+//by passing handleSubmit function as a prop
+//we can then pass-in a mock function in our unit test
+const mapDispatchToProps = dispatch => ({
+  handleSubmit: (context) => {
+    const text = context.state.text.trim();
+    if (text.length > 0) {
+      dispatch({type: 'ADD_ITEM', text});
+      context.setState({text: ''});
+    }
+  }
+});
+
+export default connect(null, mapDispatchToProps)(TodoInput);

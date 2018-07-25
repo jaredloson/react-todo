@@ -1,4 +1,4 @@
-.Todo {
+.TodoItem {
   position: relative;
   font-weight: bold;
 	height: $rowHeight;
@@ -12,7 +12,7 @@
   &--completed {
     opacity: .6;
 
-    .Todo__text {
+    .TodoItem__text {
       text-decoration: line-through;;
     }
 

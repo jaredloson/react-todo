@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Todo from '../Todo/Todo';
+import TodoItem from '../TodoItem/TodoItem';
 import TodoInput from '../TodoInput/TodoInput';
 
-class TodoList extends Component {
-
-  constructor() {
-    super();
-    this.toggleItem = this.toggleItem.bind(this);
-  }
-
-  toggleItem(id) {
-    this.props.dispatch({type: 'TOGGLE_ITEM', id: id})
-  }
+export class TodoList extends Component {
 
   render() {
 
@@ -24,24 +16,41 @@ class TodoList extends Component {
 
         {this.props.items.length > 0 ? (
           this.props.items.map( (item, idx) =>
-            <Todo
+            <TodoItem
               key={item.id}
               {...item}
-              toggleItem={this.toggleItem}
+              toggleItem={this.props.toggleItem}
             />
           )
-        ): (
-          <div className="TodoList__no-todos">Add your first todo</div>
+        ) : (
+          <div className="TodoList__no-items">Add your first todo</div>
         )}
 
       </div>
 
     );
+
   }
+
 }
 
 const mapStateToProps = state => ({
-  items: state.items
+  items: [...state.items]
 });
 
-export default connect(mapStateToProps)(TodoList);
+const mapDispatchToProps = dispatch => ({
+  toggleItem: id => dispatch({type: 'TOGGLE_ITEM', id: id})
+});
+
+TodoList.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      text: PropTypes.string.isRequired,
+      completed: PropTypes.bool.isRequired,
+    })
+  ),
+  toggleItem: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoList);
